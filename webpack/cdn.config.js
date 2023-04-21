@@ -47,13 +47,13 @@ module.exports = [{
                 <html>
                   <body>
                     <h1>Lib CDN:
-                        <a href="http://localhost:${port}/trading-vue.js">
-                            http://localhost:${port}/trading-vue.js
+                        <a href="http://localhost:${global.port}/trading-vue.js">
+                            http://localhost:${global.port}/trading-vue.js
                         </a>
                     </h1>
                     <h3>Get build hash:
-                    <a href="http://localhost:${port}/status.js">
-                        http://localhost:${port}/status.js
+                    <a href="http://localhost:${global.port}/status.js">
+                        http://localhost:${global.port}/status.js
                     </a>
                     </h3>
                   </body>

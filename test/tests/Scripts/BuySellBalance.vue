@@ -46,7 +46,7 @@ export default {
             grd.addColorStop(0.5, "#2f74ed00")
             ctx.fillStyle = grd
             ctx.moveTo(x0, bot)
-            for (var i = i0; i < this.data.length; i++) {
+            for (let i = i0; i < this.data.length; i++) {
                 let p = this.data[i]
                 let x = layout.t2screen(p[0])
                 let y = layout.$2screen(p[1])
@@ -59,7 +59,7 @@ export default {
             ctx.beginPath()
             ctx.lineWidth = 1.5
             ctx.strokeStyle = '#2579f7'
-            for (var i = i0; i < this.data.length; i++) {
+            for (let i = i0; i < this.data.length; i++) {
                 let p = this.data[i]
                 let x = layout.t2screen(p[0])
                 let y = layout.$2screen(p[1])

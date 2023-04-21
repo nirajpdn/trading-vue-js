@@ -1,26 +1,37 @@
 
 <template>
-    <div :class="['trading-vue-tbitem', selected ? 'selected-item' : '']"
+    <div
+:class="['trading-vue-tbitem', selected ? 'selected-item' : '']"
+        :style="item_style"
         @click="emit_selected('click')"
         @mousedown="mousedown"
         @touchstart="mousedown"
         @touchend="emit_selected('touch')"
-        :style="item_style">
-        <div class="trading-vue-tbicon tvjs-pixelated"
-            :style="icon_style">
-        </div>
-        <div class="trading-vue-tbitem-exp" v-if="data.group"
+>
+        <div
+class="trading-vue-tbicon tvjs-pixelated"
+            :style="icon_style"
+/>
+        <div
+v-if="data.group"
+class="trading-vue-tbitem-exp"
             :style="exp_style"
             @click="exp_click"
             @mousedown="expmousedown"
             @mouseover="expmouseover"
-            @mouseleave="expmouseleave">
+            @mouseleave="expmouseleave"
+>
             ᐳ
         </div>
-        <item-list :config="config" :items="data.items"
-            v-if="show_exp_list" :colors="colors" :dc="dc"
+        <item-list
+v-if="show_exp_list"
+:config="config"
+            :items="data.items"
+:colors="colors"
+:dc="dc"
             @close-list="close_list"
-            @item-selected="emit_selected_sub"/>
+            @item-selected="emit_selected_sub"
+/>
     </div>
 </template>
 
@@ -31,57 +42,15 @@ import Utils from '../stuff/utils.js'
 
 export default {
     name: 'ToolbarItem',
+    components: { ItemList },
     props: [
         'data', 'selected', 'colors', 'tv_id', 'config', 'dc', 'subs'
     ],
-    components: { ItemList },
-    mounted() {
-        if (this.data.group) {
-            let type = this.subs[this.data.group]
-            let item = this.data.items.find(x => x.type === type)
-            if (item) this.sub_item = item
-        }
-    },
-    methods: {
-        mousedown(e) {
-            this.click_start = Utils.now()
-            this.click_id = setTimeout(() => {
-                this.show_exp_list = true
-            }, this.config.TB_ICON_HOLD)
-        },
-        expmouseover() {
-            this.exp_hover = true
-        },
-        expmouseleave() {
-            this.exp_hover = false
-        },
-        expmousedown(e) {
-            if (this.show_exp_list) e.stopPropagation()
-        },
-        emit_selected(src) {
-            if (Utils.now() - this.click_start >
-                this.config.TB_ICON_HOLD) return
-            clearTimeout(this.click_id)
-            //if (Utils.is_mobile && src === 'click') return
-            // TODO: double firing
-            if (!this.data.group) {
-                this.$emit('item-selected', this.data)
-            } else {
-                let item = this.sub_item || this.data.items[0]
-                this.$emit('item-selected', item)
-            }
-        },
-        emit_selected_sub(item) {
-            this.$emit('item-selected', item)
-            this.sub_item = item
-        },
-        exp_click(e) {
-            if (!this.data.group) return
-            e.cancelBubble = true
-            this.show_exp_list = !this.show_exp_list
-        },
-        close_list() {
-            this.show_exp_list = false
+    data() {
+        return {
+            exp_hover: false,
+            show_exp_list: false,
+            sub_item: null
         }
     },
     computed: {
@@ -146,11 +115,53 @@ export default {
             }
         }
     },
-    data() {
-        return {
-            exp_hover: false,
-            show_exp_list: false,
-            sub_item: null
+    mounted() {
+        if (this.data.group) {
+            let type = this.subs[this.data.group]
+            let item = this.data.items.find(x => x.type === type)
+            if (item) this.sub_item = item
+        }
+    },
+    methods: {
+        mousedown(e) {
+            this.click_start = Utils.now()
+            this.click_id = setTimeout(() => {
+                this.show_exp_list = true
+            }, this.config.TB_ICON_HOLD)
+        },
+        expmouseover() {
+            this.exp_hover = true
+        },
+        expmouseleave() {
+            this.exp_hover = false
+        },
+        expmousedown(e) {
+            if (this.show_exp_list) e.stopPropagation()
+        },
+        emit_selected(src) {
+            if (Utils.now() - this.click_start >
+                this.config.TB_ICON_HOLD) return
+            clearTimeout(this.click_id)
+            //if (Utils.is_mobile && src === 'click') return
+            // TODO: double firing
+            if (!this.data.group) {
+                this.$emit('item-selected', this.data)
+            } else {
+                let item = this.sub_item || this.data.items[0]
+                this.$emit('item-selected', item)
+            }
+        },
+        emit_selected_sub(item) {
+            this.$emit('item-selected', item)
+            this.sub_item = item
+        },
+        exp_click(e) {
+            if (!this.data.group) return
+            e.cancelBubble = true
+            this.show_exp_list = !this.show_exp_list
+        },
+        close_list() {
+            this.show_exp_list = false
         }
     }
 }

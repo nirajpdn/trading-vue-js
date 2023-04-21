@@ -1,18 +1,24 @@
 <template>
 <!-- Real time data example -->
 <span>
-    <trading-vue :data="chart" :width="this.width" :height="this.height"
+    <trading-vue
+ref="tvjs"
+:data="chart"
+:width="width"
+            :height="height"
             :chart-config="{MIN_ZOOM:1}"
-            ref="tvjs"
             :toolbar="true"
             :index-based="index_based"
             :overlays="overlays"
             :color-back="colors.colorBack"
             :color-grid="colors.colorGrid"
-            :color-text="colors.colorText">
-    </trading-vue>
+            :color-text="colors.colorText"
+/>
     <span class="gc-mode">
-        <input type="checkbox" v-model="index_based">
+        <input
+v-model="index_based"
+type="checkbox"
+>
         <label>Index Based</label>
     </span>
 </span>
@@ -36,9 +42,27 @@ export default {
     name: 'DataHelper',
     icon: '⚡',
     description: 'Real-time updates. Play with DataCube in the console',
-    props: ['night'],
     components: {
         TradingVue
+    },
+    props: ['night'],
+    data() {
+        return {
+            chart: {},
+            width: window.innerWidth,
+            height: window.innerHeight,
+            index_based: false,
+            overlays: [ScriptOverlay, BSB]
+        }
+    },
+    computed: {
+        colors() {
+            return this.$props.night ? {} : {
+                colorBack: '#fff',
+                colorGrid: '#eee',
+                colorText: '#333'
+            }
+        },
     },
     mounted() {
         window.addEventListener('resize', this.onResize)
@@ -76,6 +100,10 @@ export default {
 
         })
 
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.onResize)
+        if (this.stream) this.stream.off()
     },
     methods: {
         onResize(event) {
@@ -123,28 +151,6 @@ export default {
                 ],
                 // ... other onchart/offchart updates
             })
-        }
-    },
-    beforeDestroy() {
-        window.removeEventListener('resize', this.onResize)
-        if (this.stream) this.stream.off()
-    },
-    computed: {
-        colors() {
-            return this.$props.night ? {} : {
-                colorBack: '#fff',
-                colorGrid: '#eee',
-                colorText: '#333'
-            }
-        },
-    },
-    data() {
-        return {
-            chart: {},
-            width: window.innerWidth,
-            height: window.innerHeight,
-            index_based: false,
-            overlays: [ScriptOverlay, BSB]
         }
     }
 }

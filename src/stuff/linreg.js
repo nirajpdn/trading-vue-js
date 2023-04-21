@@ -13,10 +13,10 @@ export default function regression(data, len, offset) {
         sum_xy = 0,
         sum_xx = 0,
         count = 0,
-        m, b
+        m, b;
 
     // calculate sums
-    for (var i = 0, len = data.length; i < len; i++) {
+    for (var i = 0, n = data.length; i < n; i++) {
         if (!data[i]) return NaN
         var point = data[i]
         sum_x += point[0]

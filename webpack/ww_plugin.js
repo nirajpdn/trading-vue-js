@@ -18,6 +18,7 @@ module.exports = class WWPlugin {
         try {
           prev = fs.readFileSync(PATH + 'ww$$$.json');
         } catch (e) {
+          //
         }
 
         // Write new compiled ww only if the src changed

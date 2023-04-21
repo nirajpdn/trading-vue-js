@@ -36,14 +36,14 @@ export default class Dataset {
         let nids = n.map(x => x.id)
         let pids = p.map(x => x.id)
 
-        for (var id of nids) {
+        for (let id of nids) {
             if (!pids.includes(id)) {
                 let ds = n.filter(x => x.id === id)[0]
                 this.dss[id] = new Dataset(this, ds)
             }
         }
 
-        for (var id of pids) {
+        for (let id of pids) {
             if (!nids.includes(id) && this.dss[id]) {
                 this.dss[id].remove()
             }

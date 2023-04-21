@@ -37,12 +37,15 @@ export default class BackShader {
         let cy = -ch * zz * 0.5 - props.layout.offset
         //1.025 + Math.sin(dx * 0.01) / 50
 
+        let tw;
+        let th;
+
         if (kk >= k) {
-            var tw = cw
-            var th = cw / k
+            tw = cw
+            th = cw / k
         } else {
-            var tw = ch * k
-            var th = ch
+            tw = ch * k
+            th = ch
         }
 
 

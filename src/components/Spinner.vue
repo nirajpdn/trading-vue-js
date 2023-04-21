@@ -1,7 +1,10 @@
 <template>
 <div class="tvjs-spinner">
-    <div v-for="i in 4" :key="i" :style="{background: colors.text}">
-    </div>
+    <div
+v-for="i in 4"
+:key="i"
+:style="{background: colors.text}"
+/>
 </div>
 </template>
 <script>

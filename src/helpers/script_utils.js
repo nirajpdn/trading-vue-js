@@ -1,8 +1,8 @@
 
 import Const from '../stuff/constants.js'
 
-const FDEFS = /(function |)([$A-Z_][0-9A-Z_$\.]*)[\s]*?\((.*?)\)/gmi
-const SBRACKETS = /([$A-Z_][0-9A-Z_$\.]*)[\s]*?\[([^"^\[^\]]+?)\]/gmi
+const FDEFS = /(function |)([$A-Z_][0-9A-Z_$.]*)[\s]*?\((.*?)\)/gmi
+const SBRACKETS = /([$A-Z_][0-9A-Z_$.]*)[\s]*?\[([^"^[^\]]+?)\]/gmi
 const TFSTR = /(\d+)(\w*)/gm
 
 const BUF_INC = 5

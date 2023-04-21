@@ -1,11 +1,18 @@
 <template>
-<div class="code-pane" :style="{
+<div
+class="code-pane"
+:style="{
         background: colors.back,
         borderColor: colors.border,
         width: width + 'px'
-    }">
-    <codemirror v-model="code" :options="options"
-       @input="on_change" ref="cm"/>
+    }"
+>
+    <codemirror
+ref="cm"
+v-model="code"
+       :options="options"
+@input="on_change"
+/>
 </div>
 </template>
 
@@ -25,8 +32,30 @@ export default {
         codemirror
     },
     props: ['colors', 'height', 'width', 'bundle', 'src'],
-    mounted() {
-        this.reset_style()
+    data() {
+        return {
+            code: this.$props.src,
+            options: {
+                mode: 'text/javascript',
+                tabSize: 4,
+                styleActiveLine: true,
+                lineNumbers: true,
+                line: true,
+                foldGutter: true,
+                styleSelectedText: true,
+                runmode: 'colorize',
+                matchBrackets: true,
+                showCursorWhenSelecting: true,
+                theme: "dracula",
+                extraKeys: {
+                    "Ctrl": "autocomplete"
+                },
+                hintOptions: {
+                    completeSingle: false
+                },
+                scrollbarStyle: 'simple'
+            }
+        }
     },
     computed: {
         style() {
@@ -65,6 +94,15 @@ export default {
             `
         }
     },
+    watch: {
+        width() {
+            if (!this.$refs.cm) return
+            this.$refs.cm.refresh()
+        },
+    },
+    mounted() {
+        this.reset_style()
+    },
     methods: {
         reset_style() {
             var stbr = document.getElementById('code-mirror-custom')
@@ -82,37 +120,6 @@ export default {
         on_change(text) {
             this.$emit('src-changed', text)
         },
-    },
-    watch: {
-        width() {
-            if (!this.$refs.cm) return
-            this.$refs.cm.refresh()
-        },
-    },
-    data() {
-        return {
-            code: this.$props.src,
-            options: {
-                mode: 'text/javascript',
-                tabSize: 4,
-                styleActiveLine: true,
-                lineNumbers: true,
-                line: true,
-                foldGutter: true,
-                styleSelectedText: true,
-                runmode: 'colorize',
-                matchBrackets: true,
-                showCursorWhenSelecting: true,
-                theme: "dracula",
-                extraKeys: {
-                    "Ctrl": "autocomplete"
-                },
-                hintOptions: {
-                    completeSingle: false
-                },
-                scrollbarStyle: 'simple'
-            }
-        }
     }
 }
 </script>

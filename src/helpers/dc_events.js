@@ -18,11 +18,13 @@ export default class DCEvents {
             for (var ctrl of this.tv.controllers) {
                 if (ctrl.ww) ctrl.ww(e.data)
             }
+
+            let data;
             switch(e.data.type) {
                 case 'request-data':
                     // TODO: DataTunnel class for smarter data transfer
                     if (this.ww._data_uploading) break
-                    let data = Dataset.make_tx(this, e.data.data)
+                    data = Dataset.make_tx(this, e.data.data)
                     this.send_meta_2_ww()
                     this.ww.just('upload-data', data)
                     this.ww._data_uploading = true
@@ -47,7 +49,7 @@ export default class DCEvents {
                     this.tv.$emit('signal', e.data.data)
                     break
             }
-            for (var ctrl of this.tv.controllers) {
+            for (let ctrl of this.tv.controllers) {
                 if (ctrl.post_ww) ctrl.post_ww(e.data)
             }
         }
@@ -145,7 +147,7 @@ export default class DCEvents {
     // Combine all tools and their mods
     register_tools(tools) {
         let preset = {}
-        for (var tool of this.data.tools || []) {
+        for (let tool of this.data.tools || []) {
              preset[tool.type] = tool
              delete tool.type
         }
@@ -153,7 +155,7 @@ export default class DCEvents {
         let list = [{
             type: 'Cursor', icon: Icons['cursor.png']
         }]
-        for (var tool of tools) {
+        for (let tool of tools) {
             var proto = Object.assign({}, tool.info)
             let type = tool.info.type || 'Default'
             proto.type = `${tool.use_for}:${type}`
@@ -188,7 +190,7 @@ export default class DCEvents {
             if (!s.$uuid) s.$uuid = `${obj.type}-${Utils.uuid2()}`
             args[0].uuid = s.$uuid
             args[0].sett = s
-            for (var k in props || {}) {
+            for (let k in props || {}) {
                 let proto = props[k]
                 if (s[k] !== undefined) {
                     proto.val = s[k] // use the existing val
@@ -205,7 +207,7 @@ export default class DCEvents {
             }
             // Remove old props (dropped by the current exec)
             if (s.$props) {
-                for (var k in s) {
+                for (let k in s) {
                     if (s.$props.includes(k) && !(k in props)) {
                         delete s[k]
                     }
@@ -454,12 +456,12 @@ export default class DCEvents {
                 obj.data = ov.data
             }
             if (!ov.new_ovs) continue
-            for (var id in ov.new_ovs.onchart) {
+            for (let id in ov.new_ovs.onchart) {
                 if (!this.get_one(`onchart.${id}`)) {
                     this.add('onchart', ov.new_ovs.onchart[id])
                 }
             }
-            for (var id in ov.new_ovs.offchart) {
+            for (let id in ov.new_ovs.offchart) {
                 if (!this.get_one(`offchart.${id}`)) {
                     this.add('offchart', ov.new_ovs.offchart[id])
                 }

@@ -5,6 +5,17 @@ import Overlay from '../../../src/mixins/overlay.js'
 export default {
     name: 'Illuminati',
     mixins: [Overlay],
+    data() {
+        return {
+            pic: null
+        }
+    },
+    // Define internal setting & constants here
+    computed: {
+        sett() {
+            return this.$props.settings
+        }
+    },
     methods: {
         meta_info() {
             return { author: 'C451', version: '1.0.0' }
@@ -29,17 +40,6 @@ export default {
             }
         },
         use_for() { return ['Illuminati'] },
-    },
-    // Define internal setting & constants here
-    computed: {
-        sett() {
-            return this.$props.settings
-        }
-    },
-    data() {
-        return {
-            pic: null
-        }
     }
 
 }

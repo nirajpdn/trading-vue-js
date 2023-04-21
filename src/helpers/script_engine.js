@@ -107,7 +107,7 @@ class ScriptEngine {
         // Parse non-default symbols
         symstd.parse(s)
 
-        for (var id in this.mods) {
+        for (let id in this.mods) {
             if (this.mods[id].pre_env) {
                 this.mods[id].pre_env(s.uuid, s)
             }
@@ -129,7 +129,7 @@ class ScriptEngine {
 
         this.map[s.uuid] = s
 
-        for (var id in this.mods) {
+        for (let id in this.mods) {
             if (this.mods[id].new_env) {
                 this.mods[id].new_env(s.uuid, s)
             }
@@ -155,15 +155,15 @@ class ScriptEngine {
         let mfs2 = this.make_mods_hooks('post_step')
 
         let step = (sel, unshift) => {
-            for (var m = 0; m < mfs1.length; m++) {
+            for (let m = 0; m < mfs1.length; m++) {
                 mfs1[m](sel) // pre_step
             }
 
-            for (var id of sel) {
+            for (let id of sel) {
                 this.map[id].env.step(unshift)
             }
 
-            for (var m = 0; m < mfs2.length; m++) {
+            for (let m = 0; m < mfs2.length; m++) {
                 mfs2[m](sel) // post_step
             }
         }
@@ -289,7 +289,7 @@ class ScriptEngine {
             let start = this.start(ohlcv)
             this.shared.event = 'step'
 
-            for (var i = start; i < ohlcv.length; i++) {
+            for (let i = start; i < ohlcv.length; i++) {
 
                 // Make a pause to read new WW msg
                 // TODO: speedup pause()
@@ -304,13 +304,13 @@ class ScriptEngine {
 
                 // SLOW DOWN TEST:
                 //for (var k = 1; k < 1000000; k++) {}
-                for (var m = 0; m < mfs1.length; m++) {
+                for (let m = 0; m < mfs1.length; m++) {
                     mfs1[m](sel) // pre_step
                 }
 
-                for (var id of sel) this.map[id].env.step()
+                for (let id of sel) this.map[id].env.step()
 
-                for (var m = 0; m < mfs2.length; m++) {
+                for (let m = 0; m < mfs2.length; m++) {
                     mfs2[m](sel) // post_step
                 }
 
@@ -318,7 +318,7 @@ class ScriptEngine {
                 this.limit()
             }
 
-            for (var id of sel) {
+            for (let id of sel) {
                 this.map[id].env.output.post()
             }
 
@@ -341,7 +341,7 @@ class ScriptEngine {
             this.low.unshift(data[3])
             this.close.unshift(data[4])
             this.vol.unshift(data[5])
-            for (var id in this.tss) {
+            for (let id in this.tss) {
                 if (this.tss[id].__tf__) this.tss[id].__fn__()
                 else this.tss[id].unshift(this.tss[id].__fn__())
             }
@@ -351,7 +351,7 @@ class ScriptEngine {
             this.low[0] = data[3]
             this.close[0] = data[4]
             this.vol[0] = data[5]
-            for (var id in this.tss) {
+            for (let id in this.tss) {
                 if (this.tss[id].__tf__) this.tss[id].__fn__()
                 else this.tss[id][0] = this.tss[id].__fn__()
             }
@@ -428,7 +428,7 @@ class ScriptEngine {
 
     format_update() {
         let res = []
-        for (var id in this.map) {
+        for (let id in this.map) {
             let x = this.map[id]
             if (x.output === false) {
                 res.push({id: id, data: null})
@@ -438,8 +438,8 @@ class ScriptEngine {
                 id: id,
                 data: x.env.data[x.env.data.length - 1]
             })
-            for (var side of ['onchart', 'offchart']) {
-                for (var id in x.env[side]) {
+            for (let side of ['onchart', 'offchart']) {
+                for (let id in x.env[side]) {
                     let y = x.env[side][id]
                     res.push({
                         id: `${side}.${id}`,
@@ -500,7 +500,7 @@ class ScriptEngine {
         if (s) all.push(s)
 
         let types = [{ type: 'OHLCV' }]
-        for (var s of all) {
+        for (let s of all) {
             if (s.src.data) {
                 let reqs = Object.values(s.src.data)
                 types.push(...reqs.map(x => ({
@@ -519,7 +519,7 @@ class ScriptEngine {
     // Match dataset id using script id & required type
     match_ds(id, type) {
         // TODO: develop further
-        for (var id in this.data) {
+        for (let id in this.data) {
             if (this.data[id].type === type) {
                 return id
             }

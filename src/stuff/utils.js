@@ -329,7 +329,6 @@ export default {
         !!navigator.msMaxTouchPoints ||
         ('ontouchstart' in w ||
         (w.DocumentTouch &&
-        document instanceof w.DocumentTouch))))
-        (typeof window !== 'undefined' ? window : {})
+        document instanceof w.DocumentTouch))))(typeof window !== 'undefined' ? window : {})
 
 }

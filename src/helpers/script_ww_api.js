@@ -29,7 +29,7 @@ class WebWork {
             window.BlobBuilder = window.BlobBuilder ||
                 window.WebKitBlobBuilder ||
                 window.MozBlobBuilder
-            blob = new BlobBuilder()
+            blob = new window.BlobBuilder()
             blob.append(data)
             blob = blob.getBlob()
         }

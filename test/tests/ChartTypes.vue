@@ -1,9 +1,12 @@
 <template>
-<trading-vue :data="chart" :width="this.width" :height="this.height"
+<trading-vue
+:data="chart"
+:width="width"
+:height="height"
         :color-back="colors.colorBack"
         :color-grid="colors.colorGrid"
-        :color-text="colors.colorText">
-</trading-vue>
+        :color-text="colors.colorText"
+/>
 </template>
 
 <script>
@@ -14,19 +17,16 @@ import Utils from '../../src/stuff/utils.js'
 export default {
     name: 'ChartTypes',
     description: 'Should allow you to switch between different chart types',
-    props: ['night'],
     components: {
         TradingVue
     },
-    methods: {
-        onResize(event) {
-            this.width = window.innerWidth
-            this.height = window.innerHeight - 50
+    props: ['night'],
+    data() {
+        return {
+            chart: Data,
+            width: window.innerWidth,
+            height: window.innerHeight
         }
-    },
-    mounted() {
-        window.addEventListener('resize', this.onResize)
-        this.onResize()
     },
     computed: {
         colors() {
@@ -37,14 +37,17 @@ export default {
             }
         },
     },
+    mounted() {
+        window.addEventListener('resize', this.onResize)
+        this.onResize()
+    },
     beforeDestroy() {
         window.removeEventListener('resize', this.onResize)
     },
-    data() {
-        return {
-            chart: Data,
-            width: window.innerWidth,
-            height: window.innerHeight
+    methods: {
+        onResize(event) {
+            this.width = window.innerWidth
+            this.height = window.innerHeight - 50
         }
     }
 }

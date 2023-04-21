@@ -9,8 +9,8 @@ import se from './script_engine.js'
 import * as u from './script_utils.js'
 import TS from './script_ts.js'
 
-const FDEFS1 = /(function |)([$A-Z_][0-9A-Z_$\.]*)[\s]*?\((.*?\s*)\)/mi
-const FDEFS2 = /(function |)([$A-Z_][0-9A-Z_$\.]*)[\s]*?\((.*\s*)\)/gmis
+const FDEFS1 = /(function |)([$A-Z_][0-9A-Z_$.]*)[\s]*?\((.*?\s*)\)/mi
+const FDEFS2 = /(function |)([$A-Z_][0-9A-Z_$.]*)[\s]*?\((.*\s*)\)/gmis
 const DEF_LIMIT = 5
 
 export default class ScriptEnv {
@@ -96,13 +96,13 @@ export default class ScriptEnv {
 
         let proto = Object.getPrototypeOf(this.std)
         let std = ``
-        for (var k of Object.getOwnPropertyNames(proto)) {
+        for (let k of Object.getOwnPropertyNames(proto)) {
             if (k === 'constructor') continue
             std += `const std_${k} = self.std.${k}.bind(self.std)\n`
         }
 
         let props = ``
-        for (var k in src.props || {}) {
+        for (let k in src.props || {}) {
             if (src.props[k].val !== undefined) {
                 var val = src.props[k].val
             } else if (this.src.sett[k] !== undefined) {
@@ -115,7 +115,7 @@ export default class ScriptEnv {
         // TODO: add argument values to _id
 
         let tss = ``
-        for (var k in this.shared) {
+        for (let k in this.shared) {
             if (this.shared[k] && this.shared[k].__id__) {
                 tss += `const ${k} = shared.${k}\n`
             }
@@ -123,7 +123,7 @@ export default class ScriptEnv {
 
         // Datasets
         let dss = ``
-        for (var k in src.data || {}) {
+        for (let k in src.data || {}) {
             let id = se.match_ds(this.id, src.data[k].type)
             if (!this.shared.dss[id]) {
                 let T = src.data[k].type

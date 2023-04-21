@@ -67,7 +67,9 @@ module.exports = {
                 try {
                     let argv = JSON.parse(req.query.argv)
                     console.log(...argv)
-                } catch(e) {}
+                } catch(e) {
+                  //
+                }
                 res.send("[OK]")
             })
         }

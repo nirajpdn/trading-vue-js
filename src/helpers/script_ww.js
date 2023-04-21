@@ -12,6 +12,8 @@ var data_requested = false
 
 self.onmessage = async e => {
     //console.log('Worker got:', e.data.type)
+
+    let req, lib;
     switch(e.data.type) {
 
         case 'update-dc-settings':
@@ -22,7 +24,7 @@ self.onmessage = async e => {
 
         case 'exec-script':
 
-            var req = se.data_required(e.data.data.s)
+            req = se.data_required(e.data.data.s)
             if (req && !data_requested) {
                 data_requested = true
                 self.postMessage({
@@ -38,7 +40,7 @@ self.onmessage = async e => {
 
         case 'exec-all-scripts':
 
-            var req = se.data_required(e.data.data.s)
+            req = se.data_required(e.data.data.s)
             if (req && !data_requested) {
                 data_requested = true
                 self.postMessage({
@@ -57,7 +59,7 @@ self.onmessage = async e => {
 
             await Utils.pause(1)
 
-            for (var id in e.data.data) {
+            for (let id in e.data.data) {
                 let data = e.data.data[id]
                 se.data[id] = new DatasetWW(id, data)
             }
@@ -70,7 +72,7 @@ self.onmessage = async e => {
 
         case 'upload-module':
 
-            let lib = u.make_module_lib(e.data.data)
+            lib = u.make_module_lib(e.data.data)
             se.mods[e.data.data.id] = new (
                 new Function(
                     'mod', 'se', 'lib',

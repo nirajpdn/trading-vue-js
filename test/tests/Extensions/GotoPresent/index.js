@@ -2,10 +2,10 @@
 // Index for the extentention
 
 import Main from './main.js'
-import Button from './Button.vue'
+import AButton from './AButton.vue'
 Main.__name__ = 'goto-present'
 
-const widgets = { Button }
+const widgets = { AButton }
 const components = {  }
 const overlays = {  }
 const colorpacks = {  }
@@ -17,7 +17,7 @@ const Pack = {
     overlays,
     colorpacks,
     skins,
-    Button,
+    AButton,
     Main
 }
 
@@ -29,6 +29,6 @@ export {
     overlays,
     colorpacks,
     skins,
-    Button,
+    AButton,
     Main
 }

@@ -5,7 +5,7 @@
 
 import Utils  from  '../../../../src/stuff/utils.js'
 import EventBus from './event_bus.js'
-import Button from './Button.vue'
+import AButton from './Button.vue'
 
 var event_bus = null
 
@@ -21,7 +21,7 @@ export default class Main {
         // Create a new widget instance
         this.tv.$set(this.widgets, id, {
             id: id,
-            cls: Button,
+            cls: AButton,
             data: {}
         })
 

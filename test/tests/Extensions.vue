@@ -1,12 +1,17 @@
 <template>
-<trading-vue :data="chart" :width="this.width" :height="this.height"
-        :toolbar="true" ref="tv"
-        :indexBased="false"
-        :extensions="extensions" :skin="skin"
+<trading-vue
+ref="tv"
+:data="chart"
+:width="width"
+        :height="height"
+:toolbar="true"
+        :index-based="false"
+        :extensions="extensions"
+:skin="skin"
         :color-back="colors.colorBack"
         :color-grid="colors.colorGrid"
-        :color-text="colors.colorText">
-</trading-vue>
+        :color-text="colors.colorText"
+/>
 </template>
 
 <script>
@@ -19,21 +24,17 @@ import SkinPack from './Extensions/SkinPack/index.js'
 export default {
     name: 'Extensions',
     description: 'Widgets, Standalone Comps & Skins',
-    props: ['night'],
     components: {
         TradingVue
     },
-    methods: {
-        onResize(event) {
-            this.width = window.innerWidth
-            this.height = window.innerHeight - 50
+    props: ['night'],
+    data() {
+        return {
+            chart: new DataCube(Data),
+            width: window.innerWidth,
+            height: window.innerHeight,
+            extensions: [GotoPresent, SkinPack]
         }
-    },
-    mounted() {
-        window.addEventListener('resize', this.onResize)
-        this.onResize()
-        window.dc = this.chart
-        window.tv = this.$refs.tv
     },
     computed: {
         colors() {
@@ -47,15 +48,19 @@ export default {
             return this.$props.night ? 'NightSkin' : 'DaySkin'
         }
     },
+    mounted() {
+        window.addEventListener('resize', this.onResize)
+        this.onResize()
+        window.dc = this.chart
+        window.tv = this.$refs.tv
+    },
     beforeDestroy() {
         window.removeEventListener('resize', this.onResize)
     },
-    data() {
-        return {
-            chart: new DataCube(Data),
-            width: window.innerWidth,
-            height: window.innerHeight,
-            extensions: [GotoPresent, SkinPack]
+    methods: {
+        onResize(event) {
+            this.width = window.innerWidth
+            this.height = window.innerHeight - 50
         }
     }
 }

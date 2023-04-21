@@ -121,7 +121,7 @@ export default class DCCore extends DCEvents {
         var count = {}
         // grid_id,layer_id => DC id mapping
         this.gldc = {}, this.dcgl = {}
-        for (var ov of this.data.onchart) {
+        for (let ov of this.data.onchart) {
             if (count[ov.type] === undefined) {
                 count[ov.type] = 0
             }
@@ -137,7 +137,7 @@ export default class DCCore extends DCEvents {
         count = {}
         let grids = [{}]
         let gid = 0
-        for (var ov of this.data.offchart) {
+        for (let ov of this.data.offchart) {
             if (count[ov.type] === undefined) {
                 count[ov.type] = 0
             }
@@ -246,6 +246,8 @@ export default class DCCore extends DCEvents {
     get_by_query(query, chuck) {
 
         let tuple = query.split('.')
+        let on;
+        let off;
 
         switch (tuple[0]) {
             case 'chart':
@@ -269,12 +271,12 @@ export default class DCCore extends DCEvents {
                     'chart',
                     tuple[1]
                 ])*/
-                let on = this.query_search(query, [
+                on = this.query_search(query, [
                     'onchart',
                     tuple[0],
                     tuple[1]
                 ])
-                let off = this.query_search(query, [
+                off = this.query_search(query, [
                     'offchart',
                     tuple[0],
                     tuple[1]
@@ -405,11 +407,11 @@ export default class DCCore extends DCEvents {
         let id21 = arr2.indexOf(a2[0])
         let id22 = arr2.indexOf(a2[a2.length - 1])
 
-        for (var i = 0; i < a1.length; i++) {
+        for (let i = 0; i < a1.length; i++) {
             ts[a1[i][0]] = a1[i]
         }
 
-        for (var i = 0; i < a2.length; i++) {
+        for (let i = 0; i < a2.length; i++) {
             ts[a2[i][0]] = a2[i]
         }
 
