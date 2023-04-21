@@ -34,15 +34,6 @@ export default {
   data() {
     return {
       layer_events: {
-        // 'new-grid-layer': this.new_layer,
-        // 'delete-grid-layer': this.del_layer,
-        // 'show-grid-layer': d => {
-        //   this.renderer.show_hide_layer(d);
-        //   this.redraw();
-        // },
-        // 'redraw-grid': this.redraw,
-        // 'layer-meta-props': d => this.$emit('layer-meta-props', d),
-        // 'custom-event': d => this.emit_custom_event(d),
         onNewGridLayer: this.new_layer,
         onDeleteGridLayer: this.del_layer,
         onShowGridLayer: d => {
@@ -54,24 +45,6 @@ export default {
         onCustomEvent: d => this.emit_custom_event(d),
       },
       keyboard_events: {
-        // 'register-kb-listener': event => {
-        //   this.$emit('register-kb-listener', event);
-        // },
-        // 'remove-kb-listener': event => {
-        //   this.$emit('remove-kb-listener', event);
-        // },
-        // 'keyup': event => {
-        //   if (!this.is_active) return;
-        //   this.renderer.propagate('keyup', event);
-        // },
-        // 'keydown': event => {
-        //   if (!this.is_active) return; // TODO: is this neeeded?
-        //   this.renderer.propagate('keydown', event);
-        // },
-        // 'keypress': event => {
-        //   if (!this.is_active) return;
-        //   this.renderer.propagate('keypress', event);
-        // },
         onRegisterKbListener: event => {
           this.$emit('register-kb-listener', event);
         },
@@ -234,10 +207,11 @@ export default {
           count[d.type] = 0;
         }
       }
+
       return comp_list.map((x, i) => h(x.cls, {
           ...this.layer_events,
           id: `${x.type}_${count[x.type]++}`,
-          attrs: Object.assign(this.common_props(), {
+          ...Object.assign(this.common_props(), {
             type: x.type,
             data: x.data,
             settings: x.settings,
@@ -286,6 +260,7 @@ export default {
   render() {
     const id = this.$props.grid_id;
     const layout = this.$props.layout.grids[id];
+    const overlays = this.get_overlays();
     return this.create_canvas(h, `grid-${id}`, {
       position: {
         x: 0,
@@ -318,7 +293,7 @@ export default {
           },
           onCustomEvent: this.emit_ux_event,
         }),
-      ].concat(this.get_overlays()),
+      ].concat(overlays),
     });
   },
 };

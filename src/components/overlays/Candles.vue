@@ -57,6 +57,7 @@ export default {
         this.$props.colors.volDw;
     },
   },
+
   methods: {
     meta_info() {
       return { author: 'C451', version: '1.2.1' };
@@ -65,7 +66,6 @@ export default {
       this.price = new Price(this);
     },
     draw(ctx) {
-
       // If data === main candlestick data
       // render as main chart:
       if (this.$props.sub === this.$props.data) {
@@ -92,6 +92,7 @@ export default {
 
       if (this.price_line) this.price.draw(ctx);
     },
+
     use_for() {
       return ['Candles'];
     },

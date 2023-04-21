@@ -224,7 +224,6 @@ export default {
     },
   },
   created() {
-
     // Context for text measurements
     this.ctx = new Context(this.$props);
 

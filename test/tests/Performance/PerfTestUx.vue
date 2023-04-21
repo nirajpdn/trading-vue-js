@@ -5,14 +5,13 @@ import Ux from './Ux.vue';
 export default {
   name: 'PertTestUx',
   mixins: [Overlay],
-  emits: ['new-interface'],
   methods: {
     meta_info() {
       return { author: 'C451', version: '1.0.0' };
     },
     init() {
 
-      this.$emit('new-interface', {
+      this.custom_event('new-interface', {
         target: 'grid',
         component: Ux,
         pin: ['50px', '70px'],
