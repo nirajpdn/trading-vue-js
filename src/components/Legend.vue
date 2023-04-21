@@ -86,6 +86,7 @@ export default {
   props: [
     'common', 'values', 'grid_id', 'meta_props',
   ],
+emits: ['legend-button-click'],
   computed: {
     ohlcv() {
       if (!this.$props.values || !this.$props.values.ohlcv) {

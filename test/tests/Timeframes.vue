@@ -84,7 +84,7 @@ export default {
     window.dc = this.chart;
     window.tv = this.$refs.tradingVue;
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.onResize);
   },
   methods: {

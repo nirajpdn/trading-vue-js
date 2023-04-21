@@ -57,6 +57,7 @@ export default {
     'overlays', 'tv_id', 'config', 'buttons', 'toolbar', 'ib',
     'skin', 'timezone',
   ],
+  emits: ['range-changed', 'custom-event', 'legend-button-click', 'data-len-changed'],
   data() {
     return {
       // Current data slice

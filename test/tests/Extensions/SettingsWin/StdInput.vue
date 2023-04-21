@@ -29,6 +29,7 @@
 export default {
   name: 'StdInput',
   props: ['value', 'name', 'type', 'list', 'colors'],
+  emits: ['change', 'input'],
   data() {
     return {};
   },

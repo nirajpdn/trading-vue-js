@@ -49,6 +49,7 @@ export default {
   },
   mixins: [Shaders],
   props: ['common', 'grid_id'],
+  emits: ['range-changed', 'cursor-changed', 'cursor-locked', 'sidebar-transform', 'layer-meta-props', 'custom-event', 'legend-button-click', 'register-kb-listener', 'remove-kb-listener'],
   data() {
     return {
       meta_props: {},

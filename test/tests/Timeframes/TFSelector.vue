@@ -5,7 +5,7 @@
       v-for="(tf, i) in timeframes"
       :key="i"
       class="timeframe"
-      :style="selected === i ? {color: '#44c767'} : {}"
+      :style="selected === i ? {color: '#44C767'} : {}"
       @click="on_click(tf, i)"
     >
       {{ tf }}
@@ -17,6 +17,7 @@
 export default {
   name: 'TfSelector',
   props: ['charts'],
+  emits: ['selected'],
   data() {
     return {
       selected: 0,

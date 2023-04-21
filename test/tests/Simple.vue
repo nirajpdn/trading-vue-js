@@ -43,7 +43,7 @@ export default {
     this.onResize();
     window.dc = this.chart;
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.onResize);
   },
   methods: {

@@ -76,7 +76,7 @@ export default {
     window.tv = this.$refs.tvjs;
     window.dc = this.chart;
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.onResize);
   },
   methods: {

@@ -11,6 +11,7 @@ import Interface from '../../../src/mixins/interface.js';
 export default {
   name: 'Ux2',
   mixins: [Interface],
+emits: ['custom-event'],
   data() {
     return {
       def_url: 'https://i.postimg.cc/SjMXRf21/s1.png',
@@ -29,7 +30,7 @@ export default {
   created() {
     this.overlay.mouse.on('mousemove', this.mousemove);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.overlay.mouse.off('mousemove', this.mousemove);
   },
   methods: {

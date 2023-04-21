@@ -10,6 +10,7 @@
 export default {
   name: 'TheTip',
   props: ['data'],
+  emits: ['remove-me'],
   computed: {
     style() {
       return {

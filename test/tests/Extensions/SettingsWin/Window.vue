@@ -31,6 +31,7 @@ export default {
   name: 'Window',
   mixins: [Dragg],
   props: ['title', 'tv'],
+  emits: ['close'],
   data() {
     return {
       ww: 0,

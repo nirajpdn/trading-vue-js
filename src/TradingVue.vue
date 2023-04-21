@@ -7,7 +7,8 @@
             color: chart_props.colors.text,
             font: font_comp,
             width: width+'px',
-            height: height+'px'}"
+            height: height+'px'
+    }"
     @mousedown="mousedown"
     @mouseleave="mouseleave"
   >
@@ -209,14 +210,14 @@ export default {
       default: 0,
     },
   },
+  emits: ['range-changed', 'register-tools', 'data-len-changed', 'grid-mousedown'],
   data() {
     return { reset: 0, tip: null };
   },
   computed: {
     // Copy a subset of TradingVue props
     chart_props() {
-      let offset = this.$props.toolbar ?
-        this.chart_config.TOOLBAR : 0;
+      let offset = this.$props.toolbar ? this.chart_config.TOOLBAR : 0;
       let chart_props = {
         title_txt: this.$props.titleTxt,
         overlays: this.$props.overlays.concat(this.mod_ovs),
@@ -274,7 +275,7 @@ export default {
         this.skin_proto.font : this.font;
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.custom_event({ event: 'before-destroy' });
     this.ctrl_destroy();
   },

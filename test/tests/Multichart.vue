@@ -45,7 +45,7 @@ export default {
     window.addEventListener('resize', this.onResize);
     this.onResize();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.onResize);
   },
   methods: {

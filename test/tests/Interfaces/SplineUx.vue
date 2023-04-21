@@ -8,6 +8,7 @@ import Ux2 from './Ux2.vue';
 export default {
   name: 'SplineUx',
   mixins: [Overlay],
+  emits: ['new-interface'],
   data() {
     return {
       COLORS:

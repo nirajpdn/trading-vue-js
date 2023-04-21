@@ -1,6 +1,6 @@
 <script>
 // The side bar (yep, that thing with a bunch of $$$)
-
+import { h } from 'vue';
 import Sidebar from './js/sidebar.js'
 import Canvas from '../mixins/canvas.js'
 
@@ -31,10 +31,10 @@ export default {
         this.setup()
         this.redraw()
     },
-    beforeDestroy () {
+  beforeUnmount () {
         if(this.renderer) this.renderer.destroy()
     },
-    render(h) {
+    render() {
         const id = this.$props.grid_id
         const layout = this.$props.layout.grids[id]
         return this.create_canvas(h, `sidebar-${id}`, {

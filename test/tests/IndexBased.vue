@@ -57,7 +57,7 @@ export default {
     window.tv = this.$refs.tvjs;
     window.test = this;
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.onResize);
   },
   methods: {

@@ -25,6 +25,7 @@
 export default {
   name: 'ItemList',
   props: ['config', 'items', 'colors', 'dc'],
+  emits: ['item-selected', 'close-list'],
   data() {
     return {};
   },
@@ -34,7 +35,7 @@ export default {
       'mousedown', this.onmousedown,
     );
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener(
       'mousedown', this.onmousedown,
     );

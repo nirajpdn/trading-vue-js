@@ -1,43 +1,45 @@
 <script>
-
-import Crosshair from './js/crosshair.js'
-import Utils from '../stuff/utils.js'
+import { h } from 'vue';
+import Crosshair from './js/crosshair.js';
 
 export default {
-    name: 'Crosshair',
-    props: [ 'cursor', 'colors', 'layout', 'sub' ],
-    watch: {
-        cursor: {
-            handler: function() {
+  name: 'Crosshair',
+  props: ['cursor', 'colors', 'layout', 'sub'],
+  emits: ['redraw-grid', 'new-grid-layer'],
+  watch: {
+    cursor: {
+      handler: function () {
 
-                if (!this.ch) this.create()
+        if (!this.ch) this.create();
 
-                // Explore = default mode on mobile
-                const cursor = this.$props.cursor
-                const explore = cursor.mode === 'explore'
+        // Explore = default mode on mobile
+        const cursor = this.$props.cursor;
+        const explore = cursor.mode === 'explore';
 
-                if (!cursor.x || !cursor.y) {
-                    this.ch.hide()
-                    this.$emit('redraw-grid')
-                    return
-                }
-                this.ch.visible = !explore
-            },
-            deep: true
+        if (!cursor.x || !cursor.y) {
+          this.ch.hide();
+          this.$emit('redraw-grid');
+          return;
         }
+        this.ch.visible = !explore;
+      },
+      deep: true,
     },
-    methods: {
-        create() {
-            this.ch = new Crosshair(this)
+  },
+  methods: {
+    create() {
+      this.ch = new Crosshair(this);
 
-            // New grid overlay-renderer descriptor.
-            // Should implement draw() (see Spline.vue)
-            this.$emit('new-grid-layer', {
-                name: 'crosshair',
-                renderer: this.ch
-            })
-        }
+      // New grid overlay-renderer descriptor.
+      // Should implement draw() (see Spline.vue)
+      this.$emit('new-grid-layer', {
+        name: 'crosshair',
+        renderer: this.ch,
+      });
     },
-    render(h) { return h() }
-}
+  },
+  render() {
+    return h('div');
+  },
+};
 </script>

@@ -21,6 +21,7 @@ export default {
     'id', 'tv_id', 'grid_id', 'ov_id', 'index', 'display',
     'icon', 'config',
   ],
+emits: ['legend-button-click'],
   computed: {
     base64() {
       return this.icon || Icons[this.file_name];

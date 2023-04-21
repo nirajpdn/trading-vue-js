@@ -29,6 +29,7 @@ import Interface from '../../../src/mixins/interface.js';
 export default {
   name: 'Ux',
   mixins: [Interface],
+emits: ['scrolling-test'],
   data() {
     return {
       tests: [

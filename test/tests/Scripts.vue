@@ -104,7 +104,7 @@ export default {
     window.ov = this.ov[0];
     window.test = this;
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.onResize);
   },
   methods: {

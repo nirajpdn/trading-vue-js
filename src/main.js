@@ -13,6 +13,10 @@ const app = createApp(App, {
 
 });
 
+app.config.globalProperties.$set = function (context, prop, value) {
+  context[prop] = value;
+};
+
 app.mount('#app');
 
 function debug(...argv) {

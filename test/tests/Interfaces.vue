@@ -50,7 +50,7 @@ export default {
     window.dc = this.chart;
     window.tv = this.$refs.tv;
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('resize', this.onResize);
   },
   methods: {

@@ -28,6 +28,7 @@ export default {
   props: [
     'data', 'height', 'colors', 'tv_id', 'config',
   ],
+  emits: ['custom-event'],
   data() {
     return { tool_count: 0, sub_map: {} };
   },
