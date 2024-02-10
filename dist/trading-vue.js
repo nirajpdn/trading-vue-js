@@ -13,7 +13,7 @@
 		exports["TradingVueJs"] = factory();
 	else
 		root["TradingVueJs"] = factory();
-})(self, () => {
+})(this, () => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -5251,25 +5251,13 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "Candle": () => (/* reexport */ CandleExt),
-  "Constants": () => (/* reexport */ constants),
-  "DataCube": () => (/* reexport */ DataCube),
-  "Interface": () => (/* reexport */ mixins_interface),
-  "Overlay": () => (/* reexport */ overlay),
-  "Tool": () => (/* reexport */ tool),
-  "TradingVue": () => (/* reexport */ TradingVue),
-  "Utils": () => (/* reexport */ utils),
-  "Volbar": () => (/* reexport */ VolbarExt),
-  "default": () => (/* binding */ src),
-  "layout_cnv": () => (/* reexport */ layout_cnv),
-  "layout_vol": () => (/* reexport */ layout_vol),
-  "primitives": () => (/* binding */ primitives)
+  "default": () => (/* binding */ src)
 });
+
+// UNUSED EXPORTS: Candle, Constants, DataCube, Interface, Overlay, Tool, TradingVue, Utils, Volbar, layout_cnv, layout_vol, primitives
 
 ;// CONCATENATED MODULE: ./node_modules/@vue/shared/dist/shared.esm-bundler.js
 /**
@@ -16127,7 +16115,7 @@ var ChartConfig = {
   // ms, wait to expand
   TB_BORDER: 1,
   // Toolbar border px
-  TB_B_STYLE: 'dotted',
+  TB_B_STYLE: "dotted",
   // Toolbar border style
   TOOL_COLL: 7,
   // Tool collision threshold
@@ -16155,13 +16143,13 @@ var ChartConfig = {
   // %/100 of height
   UX_OPACITY: 0.9,
   // Ux background opacity
-  ZOOM_MODE: 'tv',
+  ZOOM_MODE: "tv",
   // 'tv' or 'tl'
   L_BTN_SIZE: 21,
   // Legend Button size, px
-  L_BTN_MARGIN: '-6px 0 -6px 0',
+  L_BTN_MARGIN: "-6px 0 -6px 0",
   // css margin
-  SCROLL_WHEEL: 'prevent' // 'pass', 'click'
+  SCROLL_WHEEL: "prevent" // 'pass', 'click'
 };
 ChartConfig.FONT = "11px -apple-system,BlinkMacSystemFont,\n    Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,\n    Fira Sans,Droid Sans,Helvetica Neue,\n    sans-serif";
 var IB_TF_WARN = "When using IB mode you should specify " + "timeframe ('tf' filed in 'chart' object)," + "otherwise you can get an unexpected behaviour";
@@ -16205,6 +16193,7 @@ var MAP_UNIT = {
   map_unit: MAP_UNIT,
   IB_TF_WARN: IB_TF_WARN
 });
+var ALPHABET = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 ;// CONCATENATED MODULE: ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[7].use[0]!./src/components/Chart.vue?vue&type=template&id=04f29d20
 
 function Chartvue_type_template_id_04f29d20_render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -16397,7 +16386,7 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
   },
   // Gets numberic part of overlay id (e.g 'EMA_1' = > 1)
   get_num_id: function get_num_id(id) {
-    return parseInt(id.split('_').pop());
+    return parseInt(id.split("_").pop());
   },
   // Fast filter. Really fast, like 10X
   fast_filter: function fast_filter(arr, t1, t2) {
@@ -16465,7 +16454,7 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
   },
   // Parse timeframe or return value in ms
   parse_tf: function parse_tf(smth) {
-    if (typeof smth === 'string') {
+    if (typeof smth === "string") {
       return constants.map_unit[smth];
     } else {
       return smth;
@@ -16497,18 +16486,18 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
     var m = ctx.measureTextOrg(text);
     if (m.width === 0) {
       var doc = document;
-      var id = 'tvjs-measure-text';
+      var id = "tvjs-measure-text";
       var el = doc.getElementById(id);
       if (!el) {
         var base = doc.getElementById(tv_id);
         el = doc.createElement("div");
         el.id = id;
-        el.style.position = 'absolute';
-        el.style.top = '-1000px';
+        el.style.position = "absolute";
+        el.style.top = "-1000px";
         base.appendChild(el);
       }
       if (ctx.font) el.style.font = ctx.font;
-      el.innerText = text.replace(/ /g, '.');
+      el.innerText = text.replace(/ /g, ".");
       return {
         width: el.offsetWidth
       };
@@ -16518,16 +16507,16 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
   },
   uuid: function uuid(temp) {
     if (temp === void 0) {
-      temp = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
+      temp = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
     }
     return temp.replace(/[xy]/g, function (c) {
       var r = Math.random() * 16 | 0,
-        v = c == 'x' ? r : r & 0x3 | 0x8;
+        v = c == "x" ? r : r & 0x3 | 0x8;
       return v.toString(16);
     });
   },
   uuid2: function uuid2() {
-    return this.uuid('xxxxxxxxxxxx');
+    return this.uuid("xxxxxxxxxxxx");
   },
   // Delayed warning, f = condition lambda fn
   warn: function warn(f, text, delay) {
@@ -16570,14 +16559,14 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
     var name = ov.name;
     for (var k in ov.settings || {}) {
       var val = ov.settings[k];
-      var reg = new RegExp("\\$".concat(k), 'g');
+      var reg = new RegExp("\\$".concat(k), "g");
       name = name.replace(reg, val);
     }
     return name;
   },
   // Default cursor mode
   xmode: function xmode() {
-    return this.is_mobile ? 'explore' : 'default';
+    return this.is_mobile ? "explore" : "default";
   },
   default_prevented: function default_prevented(event) {
     if (event.original) {
@@ -16585,10 +16574,21 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
     }
     return event.defaultPrevented;
   },
+  numberToAlphabet: function numberToAlphabet(number) {
+    var count = number;
+    var result = "";
+    var _char;
+    do {
+      _char = ALPHABET[count % ALPHABET.length];
+      result = _char + result;
+      count = parseInt(count / ALPHABET.length);
+    } while (count > 0);
+    return result;
+  },
   // WTF with modern web development
   is_mobile: function (w) {
-    return 'onorientationchange' in w && (!!navigator.maxTouchPoints || !!navigator.msMaxTouchPoints || 'ontouchstart' in w || w.DocumentTouch && document instanceof w.DocumentTouch);
-  }(typeof window !== 'undefined' ? window : {})
+    return "onorientationchange" in w && (!!navigator.maxTouchPoints || !!navigator.msMaxTouchPoints || "ontouchstart" in w || w.DocumentTouch && document instanceof w.DocumentTouch);
+  }(typeof window !== "undefined" ? window : {})
 });
 ;// CONCATENATED MODULE: ./src/stuff/math.js
 // Math/Geometry
@@ -27351,6 +27351,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 })();
 
+__webpack_exports__ = __webpack_exports__["default"];
 /******/ 	return __webpack_exports__;
 /******/ })()
 ;
