@@ -26,8 +26,12 @@ let common = {
   output: {
     path: path.resolve(__dirname, "../dist"),
     filename: "[name].js",
-    library: "TradingVueJs",
-    libraryTarget: "umd",
+    library: {
+      name: "TradingVueJs",
+      type: "umd",
+      export: "default",
+    },
+    globalObject: "this",
     //libraryExport: "default"
   },
   performance: {
@@ -43,12 +47,12 @@ let common = {
       {
         test: /\.vue$/,
         exclude: /node_modules/,
-        loader: "vue-loader",
+        use: "vue-loader",
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        use: "babel-loader",
       },
       {
         test: /\.css$/,
